@@ -1,6 +1,6 @@
 
 
-export const authReducer = (state,action)=>{
+export const authReducer = (state={},action)=>{
     switch (action.type){
         // case "SET_AUTH" :
         //     return{
