@@ -6,15 +6,21 @@ const TOGGLE_IS_FETCHING = "TOGGLE_IS_FETCHING"
 const SET_ERROR = "SET_ERROR"
 const CLEAR_ERROR = "CLEAR_ERROR"
 
+
+type InitialStateType = {
+    token: string | null,
+    loading: boolean,
+    errorMessage: string | null
+}
 const initialState = {
     token: null,
     loading: false,
     errorMessage: null
-    // isAuth: false
+
 }
 console.log(initialState)
 
-export const authReducer = (state = initialState, action) => {
+export const authReducer = (state = initialState, action: any): InitialStateType => {
     switch (action.type) {
         case SET_ERROR :
             return {
@@ -47,35 +53,52 @@ export const authReducer = (state = initialState, action) => {
     }
 }
 
-export const setToken = (token) => ({
+type SetTokenActionType = {
+    type: typeof SET_TOKEN,
+    token: string | null
+}
+export const setToken = (token: string): SetTokenActionType => ({
     type: SET_TOKEN,
     token
 })
-export const clearToken = () => ({
+
+type ClearTokenActionType ={
+    type: typeof CLEAR_TOKEN
+}
+export const clearToken = ():ClearTokenActionType => ({
     type: CLEAR_TOKEN,
 })
 
-export const setError = (error) => ({
+type SetErrorActionType ={
+    type: typeof SET_ERROR,
+    error: string
+}
+export const setError = (error: string):SetErrorActionType => ({
     type: SET_ERROR,
     error
 })
 
-export const clearError = () => ({
+type ClearErrorActionType ={ type: typeof CLEAR_ERROR}
+export const clearError = ():ClearErrorActionType => ({
     type: CLEAR_ERROR,
 
 })
 
-export const toggleIsFetching = (toggleIsFetching) => ({
+type ToggleIsFetchingActionType ={
+    type: typeof TOGGLE_IS_FETCHING,
+    toggleIsFetching: boolean
+}
+export const toggleIsFetching = (toggleIsFetching: boolean):ToggleIsFetchingActionType => ({
     type: TOGGLE_IS_FETCHING,
     toggleIsFetching
 })
 
 
-export const getToken = (login, password) => async (dispatch) => {
+export const getToken = (login: string, password: string) => async (dispatch: any) => {
     dispatch(toggleIsFetching(true))
     try {
-        const {data} = await AuthAPI.login(login, password)
-        dispatch(setToken(data.data.token))
+        const response = await AuthAPI.login(login, password)
+        dispatch(setToken(response.data.token))
         dispatch(clearError())
         dispatch(toggleIsFetching(false))
     } catch (e) {
