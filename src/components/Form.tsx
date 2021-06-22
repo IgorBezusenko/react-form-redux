@@ -7,8 +7,10 @@ const useStyles = makeStyles((theme) => ({
         marginTop: theme.spacing(1),
     },
 }));
-
-export const Form = ({children, ...props}) => {
+type Props = {
+    props:any
+}
+export const Form:React.FC<Props> = ({children, props}) => {
     const styles = useStyles();
 
     return (

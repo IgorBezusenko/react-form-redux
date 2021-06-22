@@ -10,24 +10,30 @@ import {PrimaryButton} from "./PrimaryButton";
 import {yupResolver} from "@hookform/resolvers/yup";
 import {useDispatch, useSelector} from "react-redux";
 import {getToken} from "../redux/reducers/authReducer";
+import {AppState} from "../redux/store";
 
 const schema = yup.object().shape({
     login: yup.string().required("Field is required").min(4, "min symbols is 4").max(50, "max symbols is 50"),
     password: yup.string().required("Field is required").min(6, "min symbols is 6").max(25, "max symbols is 25")
 })
 
-export const Login = () => {
+type User = {
+    login: string,
+    password: string,
+    id:string
+}
+export const Login: React.FC = () => {
     const dispatch = useDispatch()
-    const state = useSelector((state) => state.authReducer);
+    const state = useSelector((state: AppState) => state.authReducer);
     const {token, loading, errorMessage} = state
 
-    const {register, handleSubmit, formState: {errors}} = useForm({
+    const {register, handleSubmit, formState: {errors}} = useForm<User>({
         defaultValues: {},
         mode: "onBlur",
         resolver: yupResolver(schema)
     })
 
-    const onSubmit = (data) => {
+    const onSubmit = (data: User)=> {
         dispatch(getToken(data.login, data.password))
     }
 

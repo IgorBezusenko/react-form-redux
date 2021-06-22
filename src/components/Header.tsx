@@ -4,6 +4,7 @@ import {Typography} from "@material-ui/core";
 import {useDispatch, useSelector} from "react-redux";
 import {Link} from "react-router-dom";
 import {clearToken} from "../redux/reducers/authReducer";
+import {AppState} from "../redux/store";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -16,7 +17,6 @@ const useStyles = makeStyles((theme) => ({
         fontSize: "40px",
         color: "deeppink",
         textShadow: "1px 1px darkred",
-
     },
     logo: {
         marginLeft: "20px"
@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
 
 export const Header = () => {
     const styles = useStyles();
-    const token = useSelector(state => state.authReducer.token)
+    const token = useSelector((state:AppState) => state.authReducer.token)
     const dispatch = useDispatch()
     const logOut = ()=>dispatch(clearToken())
     return (

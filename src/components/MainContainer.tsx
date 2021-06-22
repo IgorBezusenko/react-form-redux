@@ -12,7 +12,10 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export const MainContainer = ({ children, ...props }) => {
+type Props = {
+    props?:any
+}
+export const MainContainer: React.FC<Props> = ({ children, props }) => {
     const styles = useStyles();
 
     return (

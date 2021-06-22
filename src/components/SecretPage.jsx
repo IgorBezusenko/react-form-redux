@@ -2,7 +2,7 @@ import React from "react";
 import {Typography} from "@material-ui/core";
 import {MainContainer} from "./MainContainer";
 
-export const SecretPage = () => {
+export const SecretPage: React.FC = () => {
     return (
         <MainContainer>
             <Typography component={"h1"} variant={"h5"} color={"primary"}>This is Secret Page</Typography>

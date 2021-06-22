@@ -8,12 +8,12 @@ const CLEAR_ERROR = "CLEAR_ERROR"
 
 
 type InitialStateType = {
-    token: string | null,
+    token?: string | null,
     loading: boolean,
     errorMessage: string | null
 }
 const initialState = {
-    token: null,
+    token: localStorage.getItem("token") || null,
     loading: false,
     errorMessage: null
 
