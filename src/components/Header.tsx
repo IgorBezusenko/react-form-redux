@@ -31,7 +31,10 @@ export const Header = () => {
     const styles = useStyles();
     const token = useSelector((state:AppState) => state.authReducer.token)
     const dispatch = useDispatch()
-    const logOut = ()=>dispatch(clearToken())
+    const logOut = ()=> {
+        localStorage.removeItem('token')
+        dispatch(clearToken())
+    }
     return (
         <Typography component={"div"} className={styles.root}>
             <Typography component={"h1"} variant={"h5"} className={styles.logo}><Link to={"/"}>Home Page</Link></Typography>

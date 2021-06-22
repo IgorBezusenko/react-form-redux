@@ -6,20 +6,14 @@ const TOGGLE_IS_FETCHING = "TOGGLE_IS_FETCHING"
 const SET_ERROR = "SET_ERROR"
 const CLEAR_ERROR = "CLEAR_ERROR"
 
-
-type InitialStateType = {
-    token?: string | null,
-    loading: boolean,
-    errorMessage: string | null
-}
 const initialState = {
-    token: localStorage.getItem("token") || null,
+    token: localStorage.getItem("token") || null as string | null,
     loading: false,
     errorMessage: null
-
 }
-console.log(initialState)
 
+type InitialStateType = typeof initialState
+console.log(initialState)
 export const authReducer = (state = initialState, action: any): InitialStateType => {
     switch (action.type) {
         case SET_ERROR :
@@ -40,7 +34,9 @@ export const authReducer = (state = initialState, action: any): InitialStateType
         case CLEAR_TOKEN :
             return {
                 ...state,
-                token: null
+                token: null,
+
+
             }
 
         case  TOGGLE_IS_FETCHING:
@@ -57,7 +53,7 @@ type SetTokenActionType = {
     type: typeof SET_TOKEN,
     token: string | null
 }
-export const setToken = (token: string): SetTokenActionType => ({
+export const setToken = (token: string | null): SetTokenActionType => ({
     type: SET_TOKEN,
     token
 })

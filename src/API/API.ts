@@ -8,7 +8,7 @@ type LorinResponseType = {
     status: number,
     success: boolean,
     data:{
-        token:string
+        token: string | null
     }
 }
 export const AuthAPI = {

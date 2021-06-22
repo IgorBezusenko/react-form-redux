@@ -10,7 +10,9 @@ export const Home: React.FC =()=>{
     const token = useSelector((state:AppState)=>state.authReducer.token)
 
     useEffect(() => {
-        localStorage.setItem("token", token);
+        if (typeof token === "string") {
+            localStorage.setItem("token", token);
+        }
     }, );
     console.log("Token",token)
     return(
